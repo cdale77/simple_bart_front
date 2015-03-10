@@ -15,19 +15,7 @@
         getInitialState: function() {
           return {data: []};
         },
-        componentDidMount: function() {
-          $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            success: function(data) {
-              this.setState({data: data});
-            }.bind(this),
-            error: function(xhr, status, err) {
-              console.error(this.props.url, status, err.toString());
-            }.bind(this)
-          });
-        },
-        loadDataFromServer: function() {
+        handleSubmit: function(station) {
           $.ajax({
             url: this.props.url,
             dataType: 'json',
@@ -42,7 +30,7 @@
         render: function() {
           return (
             <div className="infoBox">
-              <StationSelectForm />
+              <StationSelectForm onSubmit={this.handleSubmit} />
               <DepartureList data={this.state.data} />
               <DepartureListing />
             </div>
@@ -52,9 +40,14 @@
 
       var DepartureList = React.createClass({
         render: function() {
+          var departureListings = this.props.data.map(function (departureListing) {
+            return (
+              <DepartureListing listing={departureListing} />
+             );
+          });
           return (
             <div className="departureList">
-              <h2>Here are your departures</h2>
+              {departureListings}
             </div>
           );
         }
@@ -63,18 +56,24 @@
       var DepartureListing = React.createClass({
         render: function() {
           return (
-            <div classNmae="departureListing">
+            <div className="departureListing">
               <h3>Departure</h3>
+              {this.props}
             </div>
           );
         }
       });
     
       var StationSelectForm = React.createClass({
+        handleSubmit: function(e) {
+          e.preventDefault();
+          var station = this.refs.station.getDOMNode().value.trim();
+          this.props.onSumbit({station: station});
+        },
         render: function() {
           return (
             <div className="stationSelectForm">
-              <select>
+              <select ref="station">
                 <option value='12th'>12th St. Oakland City Center</option>
                 <option value='16th'>16th St. Mission (SF)</option>
                 <option value='19th'>19th St. Oakland</option>
