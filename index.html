@@ -32,7 +32,6 @@
             <div className="infoBox">
               <StationSelectForm onSubmit={this.handleSubmit} />
               <DepartureList data={this.state.data} />
-              <DepartureListing />
             </div>
           );
         }
@@ -40,9 +39,11 @@
 
       var DepartureList = React.createClass({
         render: function() {
-          var departureListings = this.props.data.map(function (departureListing) {
+          console.log(this.props.data);
+          var departureListings = this.props.data.map(function(departureListing) {
+            console.log("in the loop: ", departureListing);
             return (
-              <DepartureListing listing={departureListing} />
+              <DepartureListing name={departureListing.destination_name} />
              );
           });
           return (
@@ -58,12 +59,13 @@
           return (
             <div className="departureListing">
               <h3>Departure</h3>
-              {this.props}
+              This is a listing
+              {this.props.name}
             </div>
           );
         }
       });
-    
+
       var StationSelectForm = React.createClass({
         handleSubmit: function(e) {
           e.preventDefault();
