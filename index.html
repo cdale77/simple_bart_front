@@ -68,11 +68,11 @@
         handleSubmit: function(e) {
           e.preventDefault();
           var station = this.refs.station.getDOMNode().value.trim();
-          this.props.onSumbit({station: station});
+          this.props.onSubmit({station: station});
         },
         render: function() {
           return (
-            <div className="stationSelectForm">
+            <form className="stationSelectForm" onSubmit={this.handleSubmit} >
               <select ref="station">
                 <option value='12th'>12th St. Oakland City Center</option>
                 <option value='16th'>16th St. Mission (SF)</option>
@@ -119,7 +119,7 @@
                 <option value='woak'>West Oakland</option>  
               </select>
               <input type="submit" value="Find Trains" />
-            </div>
+            </form>
           );
         }
       });
