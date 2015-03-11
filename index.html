@@ -16,8 +16,9 @@
           return {data: []};
         },
         handleSubmit: function(station) {
+        console.log(station);
           $.ajax({
-            url: this.props.url,
+            url: this.props.url + station.station,
             dataType: 'json',
             success: function(data) {
               this.setState({data: data});
@@ -44,8 +45,9 @@
             departureListings.push(
               <DepartureListing
               name={this.props.data[departureSet].destination_name}
-              length={this.props.data[departureSet].destination_name}
-              arriving_in={this.props.data[departureSet].estimates.minutes}/>
+              length={this.props.data[departureSet].estimates.length}
+              arriving_in={this.props.data[departureSet].estimates.minutes}
+              platform={this.props.data[departureSet].estimates.platform} />
               );
           };
           return (
@@ -63,7 +65,8 @@
               <h3>Departure</h3>
               Destination: {this.props.name}<br />
               Length: {this.props.length}<br />
-              Arriving: {this.props.arriving_in}
+              Arriving: {this.props.arriving_in}<br />
+              Platform: {this.props.platform}
             </div>
           );
         }
@@ -130,7 +133,7 @@
       });
     
       React.render(
-        <TrainBox url="http://simple-bart-api.herokuapp.com/departures/rich" />,
+        <TrainBox url="http://simple-bart-api.herokuapp.com/departures/" />,
         document.getElementById("content")
       );    
     </script>
