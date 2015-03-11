@@ -39,13 +39,14 @@
 
       var DepartureList = React.createClass({
         render: function() {
-          console.log(this.props.data);
-          var departureListings = this.props.data.map(function(departureListing) {
-            console.log("in the loop: ", departureListing);
-            return (
-              <DepartureListing name={departureListing.destination_name} />
-             );
-          });
+          var departureListings = [];
+          for(var departureSet in this.props.data) {
+            departureListings.push(
+              <DepartureListing
+              name={this.props.data[departureSet].destination_name}
+              arriving_in={this.props.data[departureSet].estimates.minutes}/>
+              );
+          };
           return (
             <div className="departureList">
               {departureListings}
@@ -59,8 +60,8 @@
           return (
             <div className="departureListing">
               <h3>Departure</h3>
-              This is a listing
-              {this.props.name}
+              Desination: {this.props.name}<br />
+              Arriving: {this.props.arriving_in}
             </div>
           );
         }
