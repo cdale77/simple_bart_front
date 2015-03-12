@@ -10,8 +10,54 @@
     <div id="content">
     </div>
     <script type="text/jsx">
+      
+      var stationList = [
+        { value: "12th", label:  "12th St. Oakland City Center" },
+        { value: "16th", label:  "16th St. Mission (SF)" },
+        { value: "19th", label:  "19th St. Oakland" },
+        { value: "24th", label:  "24th St. Mission (SF)" },
+        { value: "ashb", label:  "Ashby (Berkeley)" },
+        { value: "balb", label:  "Balboa Park (SF)" },
+        { value: "bayf", label:  "Bay Fair (San Leandro)" },
+        { value: "cast", label:  "Castro Valley" },
+        { value: "civc", label:  "Civic Center (SF)" },
+        { value: "cols", label:  "Coliseum/Oakland Airport" },
+        { value: "colm", label:  "Colma" },
+        { value: "conc", label:  "Concord" },
+        { value: "daly", label:  "Daly City" },
+        { value: "dbrk", label:  "Downtown Berkeley" },
+        { value: "dubl", label:  "Dublin/Pleasanton" },
+        { value: "deln", label:  "El Cerrito del Norte" },
+        { value: "plza", label:  "El Cerrito Plaza" },
+        { value: "embr", label:  "Embarcadero (SF)" },
+        { value: "frmt", label:  "Fremont" },
+        { value: "ftvl", label:  "Fruitvale (Oakland)" },
+        { value: "glen", label:  "Glen Park (SF)" },
+        { value: "hayw", label:  "Hayward" },
+        { value: "lafy", label:  "Lafayette" },
+        { value: "lake", label:  "Lake Merritt (Oakland)" },
+        { value: "mcar", label:  "MacArthur (Oakland)" },
+        { value: "mlbr", label:  "Millbrae" },
+        { value: "mont", label:  "Montgomery St. (SF)" },
+        { value: "nbrk", label:  "North Berkeley" },
+        { value: "ncon", label:  "North Concord/Martinez" },
+        { value: "orin", label:  "Orinda" },
+        { value: "pitt", label:  "Pittsburg/Bay Point" },
+        { value: "phil", label:  "Pleasant Hill" },
+        { value: "powl", label:  "Powell St. (SF)" },
+        { value: "rich", label:  "Richmond" },
+        { value: "rock", label:  "Rockridge (Oakland)" },
+        { value: "sbrn", label:  "San Bruno" },
+        { value: "sfia", label:  "San Francisco Int'l Airport" },
+        { value: "sanl", label:  "San Leandro" },
+        { value: "shay", label:  "South Hayward" },
+        { value: "ssan", label:  "South San Francisco" },
+        { value: "ucty", label:  "Union City" },
+        { value: "wcrk", label:  "Walnut Creek" },
+        { value: "woak", label:  "West Oakland" }
+       ];
 
-      var TrainBox = React.createClass({
+        var TrainBox = React.createClass({
         getInitialState: function() {
           return {data: []};
         },
@@ -79,111 +125,32 @@
           this.props.onSubmit({station1: station1, station2: station2});
         },
         render: function() {
+  
           return (
             <form className="stationSelectForm" onSubmit={this.handleSubmit} >
               <label htmlFor="station1">Departure</label>
-              <select ref="station1">
-                <option value='12th'>12th St. Oakland City Center</option>
-                <option value='16th'>16th St. Mission (SF)</option>
-                <option value='19th'>19th St. Oakland</option>
-                <option value='24th'>24th St. Mission (SF)</option>
-                <option value='ashb'>Ashby (Berkeley)</option>
-                <option value='balb'>Balboa Park (SF)</option>
-                <option value='bayf'>Bay Fair (San Leandro)</option>
-                <option value='cast'>Castro Valley</option>
-                <option value='civc'>Civic Center (SF)</option>
-                <option value='cols'>Coliseum/Oakland Airport</option>
-                <option value='colm'>Colma</option>
-                <option value='conc'>Concord</option>
-                <option value='daly'>Daly City</option>
-                <option value='dbrk'>Downtown Berkeley</option>
-                <option value='dubl'>Dublin/Pleasanton</option>
-                <option value='deln'>El Cerrito del Norte</option>
-                <option value='plza'>El Cerrito Plaza</option>
-                <option value='embr'>Embarcadero (SF)</option>
-                <option value='frmt'>Fremont</option>
-                <option value='ftvl'>Fruitvale (Oakland)</option>
-                <option value='glen'>Glen Park (SF)</option>
-                <option value='hayw'>Hayward</option>
-                <option value='lafy'>Lafayette</option>
-                <option value='lake'>Lake Merritt (Oakland)</option>
-                <option value='mcar'>MacArthur (Oakland)</option>
-                <option value='mlbr'>Millbrae</option>
-                <option value='mont'>Montgomery St. (SF)</option>
-                <option value='nbrk'>North Berkeley</option>
-                <option value='ncon'>North Concord/Martinez</option>
-                <option value='orin'>Orinda</option>
-                <option value='pitt'>Pittsburg/Bay Point</option>
-                <option value='phil'>Pleasant Hill</option>
-                <option value='powl'>Powell St. (SF)</option>
-                <option value='rich'>Richmond</option>
-                <option value='rock'>Rockridge (Oakland)</option>
-                <option value='sbrn'>San Bruno</option>
-                <option value='sfia'>San Francisco Int'l Airport</option>
-                <option value='sanl'>San Leandro</option>
-                <option value='shay'>South Hayward</option>
-                <option value='ssan'>South San Francisco</option>
-                <option value='ucty'>Union City</option>
-                <option value='wcrk'>Walnut Creek</option>
-                <option value='woak'>West Oakland</option>  
+              <select ref="station1" >
+              {stationList.map(function(station) {
+                return <option value={station.value}>{station.label}</option>
+              })}
               </select><br />
               <label htmlFor="station2">Destination</label>
               <select ref="station2">
                 <option disabled selected></option>
-                <option value='12th'>12th St. Oakland City Center</option>
-                <option value='16th'>16th St. Mission (SF)</option>
-                <option value='19th'>19th St. Oakland</option>
-                <option value='24th'>24th St. Mission (SF)</option>
-                <option value='ashb'>Ashby (Berkeley)</option>
-                <option value='balb'>Balboa Park (SF)</option>
-                <option value='bayf'>Bay Fair (San Leandro)</option>
-                <option value='cast'>Castro Valley</option>
-                <option value='civc'>Civic Center (SF)</option>
-                <option value='cols'>Coliseum/Oakland Airport</option>
-                <option value='colm'>Colma</option>
-                <option value='conc'>Concord</option>
-                <option value='daly'>Daly City</option>
-                <option value='dbrk'>Downtown Berkeley</option>
-                <option value='dubl'>Dublin/Pleasanton</option>
-                <option value='deln'>El Cerrito del Norte</option>
-                <option value='plza'>El Cerrito Plaza</option>
-                <option value='embr'>Embarcadero (SF)</option>
-                <option value='frmt'>Fremont</option>
-                <option value='ftvl'>Fruitvale (Oakland)</option>
-                <option value='glen'>Glen Park (SF)</option>
-                <option value='hayw'>Hayward</option>
-                <option value='lafy'>Lafayette</option>
-                <option value='lake'>Lake Merritt (Oakland)</option>
-                <option value='mcar'>MacArthur (Oakland)</option>
-                <option value='mlbr'>Millbrae</option>
-                <option value='mont'>Montgomery St. (SF)</option>
-                <option value='nbrk'>North Berkeley</option>
-                <option value='ncon'>North Concord/Martinez</option>
-                <option value='orin'>Orinda</option>
-                <option value='pitt'>Pittsburg/Bay Point</option>
-                <option value='phil'>Pleasant Hill</option>
-                <option value='powl'>Powell St. (SF)</option>
-                <option value='rich'>Richmond</option>
-                <option value='rock'>Rockridge (Oakland)</option>
-                <option value='sbrn'>San Bruno</option>
-                <option value='sfia'>San Francisco Int'l Airport</option>
-                <option value='sanl'>San Leandro</option>
-                <option value='shay'>South Hayward</option>
-                <option value='ssan'>South San Francisco</option>
-                <option value='ucty'>Union City</option>
-                <option value='wcrk'>Walnut Creek</option>
-                <option value='woak'>West Oakland</option>
-              </select>
+                {stationList.map(function(station) {
+                 return <option value={station.value}>{station.label}</option>
+                })}
+                 </select>
               <input type="submit" value="Find Trains" />
             </form>
           );
         }
       });
-    
+
       React.render(
         <TrainBox url="http://simple-bart-api.herokuapp.com/departures/" />,
         document.getElementById("content")
-      );    
+      );
     </script>
   </body>
 </html>
