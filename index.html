@@ -41,13 +41,14 @@
       var DepartureList = React.createClass({
         render: function() {
           var departureListings = [];
-          for(var departureSet in this.props.data) {
+          var data = this.props.data;
+          for(var departureSet in data) {
             departureListings.push(
               <DepartureListing
-              name={this.props.data[departureSet].destination_name}
-              length={this.props.data[departureSet].estimates.length}
-              arriving_in={this.props.data[departureSet].estimates.minutes}
-              platform={this.props.data[departureSet].estimates.platform} />
+              name={data[departureSet].destination_name}
+              length={data[departureSet].estimates.length}
+              arriving_in={data[departureSet].estimates.minutes}
+              platform={data[departureSet].estimates.platform} />
               );
           };
           return (
@@ -80,20 +81,19 @@
           this.props.onSubmit({station1: station1, station2: station2});
         },
         render: function() {
-  
           return (
             <form className="stationSelectForm" onSubmit={this.handleSubmit} >
               <label htmlFor="station1">Departure</label>
               <select ref="station1" >
-              {stationList.map(function(station) {
-                return <option value={station.value}>{station.label}</option>
-              })}
+                {stationList.map(function(station) {
+                  return <option value={station.value}>{station.label}</option>
+                })}
               </select><br />
               <label htmlFor="station2">Destination</label>
               <select ref="station2">
                 <option disabled selected></option>
                 {stationList.map(function(station) {
-                 return <option value={station.value}>{station.label}</option>
+                  return <option value={station.value}>{station.label}</option>
                 })}
                  </select>
               <input type="submit" value="Find Trains" />
