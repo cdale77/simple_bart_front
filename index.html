@@ -43,14 +43,16 @@
           var departureListings = [];
           var data = this.props.data;
           for(var departureSet in data) {
-            departureListings.push(
-              <DepartureListing
-              name={data[departureSet].destination_name}
-              length={data[departureSet].estimates.length}
-              arriving_in={data[departureSet].estimates.minutes}
-              platform={data[departureSet].estimates.platform} />
-              );
-          };
+            data[departureSet].estimates.forEach(function(estimate) {
+              departureListings.push(
+                <DepartureListing
+                  name={data[departureSet].destination_name}
+                  length={estimate.length}
+                  arriving_in={estimate.minutes}
+                  platform={estimate.platform} />
+                );
+              });
+            }
           return (
             <div className="departureList">
               {departureListings}
